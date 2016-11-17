@@ -12,6 +12,10 @@ python3 toJsonWithID.py > $DATA_PATH/$FILENAME.json
 bzip2 -9 -c $DATA_PATH/$FILENAME.json > $DATA_PATH/$FILENAME.json.bz2
 
 wc -l $DATA_PATH/$FILENAME.csv | awk {'print "Document count: " $1'}
-stat -f"Uncompressed Bytes: %z" $DATA_PATH/$FILENAME.json
-stat -f"Compressed Bytes: %z" $DATA_PATH/$FILENAME.json.bz2
+
+UNCOMPRESSED_BYTES="$(wc -c < "$DATA_PATH/$FILENAME.json")"
+echo "Uncompressed Bytes: $UNCOMPRESSED_BYTES"
+
+COMPRESSED_BYTES="$(wc -c < $DATA_PATH/$FILENAME.json.bz2)"
+echo "Compressed Bytes: $COMPRESSED_BYTES"
 
